@@ -1,5 +1,4 @@
-# AngularstartChat
-
+Angular template created which has a simple login, register and dashboard alongside routes and authentication managed without modular structure in standalone format (adhering to defaults in version 17+ of Angular)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
 
 ## Development server
