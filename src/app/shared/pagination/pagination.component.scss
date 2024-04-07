@@ -1,0 +1,15 @@
+.pagination{
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.page-item-circle {
+    position: relative;
+    display: block;
+    font-size:medium;
+    color: white;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 50%;
+}

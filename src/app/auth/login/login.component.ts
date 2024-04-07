@@ -42,7 +42,6 @@ export default class LoginComponent implements AfterViewInit {
   isRegistration: boolean = true;
   constructor() {
     effect(() => {
-      console.log(this.authService.user());
       if (this.authService.user()) {
         this.router.navigate(['home']);
       }
