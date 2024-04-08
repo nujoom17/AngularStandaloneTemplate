@@ -2,8 +2,6 @@ import { Component, effect, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MessageInputComponent } from './ui/message-input.component';
-import { MessageListComponent } from './ui/message-list.component';
 import { AuthService } from '../shared/data-access/auth.service';
 import { Router } from '@angular/router';
 
@@ -20,13 +18,7 @@ import { Router } from '@angular/router';
       </mat-toolbar>
     </div>
   `,
-  imports: [
-    MessageInputComponent,
-    MessageListComponent,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule],
   styles: [
     `
       .container {
