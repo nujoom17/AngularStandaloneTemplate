@@ -60,11 +60,11 @@ export class PaginationComponent {
     }
   }
 
-  applyPagination(event: any) {
+    applyPagination(event: any, pageSizeChanged?:boolean) {
     if (
       event > this.pagesVisible ||
       event < 1 ||
-      this.pageConfig.pageNumber == event
+      (this.pageConfig.pageNumber == event && !pageSizeChanged) 
     )
       return;
     this.pageConfig.pageNumber = event;
@@ -82,5 +82,10 @@ export class PaginationComponent {
       pageNumber: this.pageConfig.pageNumber,
       pageSize: this.pageConfig.pageSize,
     });
+  }
+
+  pageSizeChanged(event){
+    this.pageConfig.pageSize = event
+    this.applyPagination(1,true)
   }
 }
