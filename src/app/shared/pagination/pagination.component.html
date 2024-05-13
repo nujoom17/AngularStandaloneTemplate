@@ -1,6 +1,6 @@
 <div class="d-flex flex-stack flex-wrap">
-   <div>
-    <select class="form-select-sm" *ngIf="!!showPageIndex" [(ngModel)]="pageConfig.pageSize"
+   <div  *ngIf="!!showPageIndex">
+    <select class="form-select-sm" [(ngModel)]="pageConfig.pageSize"
     (ngModelChange)="pageSizeChanged($event)">
     <option
     value=""
