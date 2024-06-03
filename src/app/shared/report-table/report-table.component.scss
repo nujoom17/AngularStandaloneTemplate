@@ -1,0 +1,124 @@
+/* Container styles */
+.wrapper-root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  width: 75vw;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Card styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+  background-color: #fff;
+  width: 100%; /* Ensure the card takes full width */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Button styles */
+.btn-refresh,
+.btn-export {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-refresh {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btn-export {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Search container styles */
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 16px;
+}
+
+.search-container i {
+  position: absolute;
+  left: 12px;
+  color: #666;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px 8px 32px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Table styles */
+.table-wrapper {
+  flex-grow: 1; /* Ensures the table wrapper takes available space */
+  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  width: 100%; /* Ensure the wrapper takes full width */
+}
+
+.custom-table {
+  width: 100%; /* Ensure the table takes full width */
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.table-header {
+  background-color: #f1f1f1;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-cell {
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-body {
+  background-color: #fff;
+}
+
+.row-cell {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}

@@ -1,25 +1,31 @@
-<div class="d-flex flex-stack flex-wrap">
-   <div  *ngIf="!!showPageIndex">
-    <select class="form-select-sm" [(ngModel)]="pageConfig.pageSize"
-    (ngModelChange)="pageSizeChanged($event)">
-    <option
-    value=""
-  >
-    {{"select"}}
-  </option>
-  <option value="5">5</option>
-  <option value="10">10</option>
-  <option value="25">25</option>
-  <option value="50">50</option>
-  </select>
-  {{"page-size"}}
+<div class="pagination-wrapper-root">
+  @if(!!showPageIndex){
+    <div >
+     <select class="form-select-sm" [(ngModel)]="pageConfig.pageSize"
+     (ngModelChange)="pageSizeChanged($event)">
+     <option
+     value=""
+   >
+     {{"select"}}
+   </option>
+   <option value="5">5</option>
+   <option value="10">10</option>
+   <option value="25">25</option>
+   <option value="50">50</option>
+   </select>
+   
+ 
+ </div>
 
-</div>
-  <div class="fs-6 fw-semibold text-gray-700" *ngIf="!!showPageIndex">
-    {{ "showing" }} {{ minIndex }} {{ "to" }} {{ maxIndex }} {{ "of" }}
-    {{ totalCount }}
-    {{ "records" }}
-  </div>
+  }
+  @if(!!showPageIndex){
+
+    <div class="fs-6 fw-semibold text-gray-700">
+      {{ "showing" }} {{ minIndex }} {{ "to" }} {{ maxIndex }} {{ "of" }}
+      {{ totalCount }}
+      {{ "records" }}
+    </div>
+  }
 
   <!--begin::Pages-->
   <ul class="pagination">

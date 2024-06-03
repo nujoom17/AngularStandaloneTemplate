@@ -1,0 +1,46 @@
+<div class="container">
+    <mat-toolbar color="primary">
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="authService.logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+    <!--Re usable table component, pass the names of the columns in custom headers ng-template and the respective row data items in customRows and use anywhere-->
+    <app-report-table
+    #reportTable
+    reportTitle="my-report"
+    [isSearchWithDropdown]="false"
+  >
+    <ng-template #customHeaders>  
+      <th class="min-w-60px">Entity Name</th>
+      <th class="min-w-60px">
+        Entity Contact
+      </th>
+      <th class="min-w-60px">
+        Type
+      </th>
+      <th class="min-w-60px">
+        Extra Info
+      </th>
+   
+    </ng-template>
+    <ng-template #customRows let-item>
+      <td>{{ item?.EntityName }}</td>
+      <td>{{ item?.EntityContact }}</td>
+      <td>{{ item?.Type }}</td>
+      <td>{{ item?.ExtraInfo }}</td>
+   
+    </ng-template>
+    </app-report-table>
+    
+    @if(totalCount>0){
+      <app-pagination
+      style="width:75% !important"
+      [showPageIndex]="true"
+      [pageConfig]="pageConfig()"
+      [pagesVisible]="pagesVisible()"
+      [totalCount]="totalCount"
+      (pageData)="pageUpdated($event)"
+    ></app-pagination>
+    }
+  </div>

@@ -1,0 +1,67 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 16px;
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #3f51b5;
+    color: white;
+    box-shadow: 0px -7px 11px 0px var(--accent-color);
+    position: fixed;
+    top:0
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
+  app-message-list {
+    height: 100%;
+    width: 100%;
+  }
+  
+  app-message-input {
+    position: fixed;
+    bottom: 0;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  
+  th.header {
+    background-color: #f1f1f1;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  td.cell {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  
+  button[mat-icon-button] {
+    color: white;
+  }
+  
+
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  
+  .app-pagination {
+    border-top: 1px solid #ddd;
+    padding-top: 16px;
+  }

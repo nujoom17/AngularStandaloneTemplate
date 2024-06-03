@@ -7,6 +7,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 interface pageConfig {
   pageSize: number;
@@ -17,7 +18,7 @@ interface pageConfig {
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
 })
 export class PaginationComponent {
   minIndex: number = 1;
@@ -84,8 +85,8 @@ export class PaginationComponent {
     });
   }
 
-  pageSizeChanged(event){
-    this.pageConfig.pageSize = event
+  pageSizeChanged(event:any){
+    this.pageConfig.pageSize = event as number
     this.applyPagination(1,true)
   }
 }

@@ -1,0 +1,75 @@
+<!--begin::Content-->
+<div class="wrapper-root" id="kt_content">
+  <!--begin::Toolbar-->
+  <!--end::Toolbar-->
+  <!--begin::Post-->
+  <div class="post">
+    <!--begin::Card-->
+    <div class="card">
+      <!--begin::Card header-->
+      <div class="card-header">
+        <div class="card-actions">
+          <!--begin::Export-->
+          <button type="button" (click)="fetchReportData()" class="btn-refresh">
+            <i class="ki-outline ki-arrows-loop fs-2"></i> Refresh
+          </button>
+          <!--end::Export-->
+          <!--begin::Add customer-->
+          <button type="button" (click)="exportExcel()" class="btn-export">
+            <i class="ki-outline ki-exit-up fs-2"></i> Export
+          </button>
+          <!--end::Add customer-->
+        </div>
+      </div>
+      <!--end::Card header-->
+      <!--begin::Search-->
+      <div class="search-container">
+        <i class="ki-outline ki-magnifier fs-3 position-absolute"></i>
+        <input
+          type="text"
+          data-kt-customer-table-filter="search"
+          class="search-input"
+          placeholder="Search..."
+          [(ngModel)]="txtQuery"
+          (ngModelChange)="onFieldChange($event)"
+        />
+      </div>
+      <!--end::Search-->
+      <!--begin::Card body-->
+      <div class="card-body">
+        <!--begin::Table-->
+        <div class="table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr class="table-header">
+                <ng-container *ngTemplateOutlet="customHeaders || defaultHeaderTemplate"></ng-container>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr *ngFor="let item of reportData" appCustomAnimate>
+                <ng-container *ngTemplateOutlet="customRows || defaultRowTemplate; context: { $implicit: item }"></ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--end::Table-->
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Post-->
+</div>
+<!--end::Content-->
+
+<ng-template #defaultHeaderTemplate>
+  <th class="header-cell">Name</th>
+  <th class="header-cell">Email</th>
+  <th class="header-cell">Phone</th>
+</ng-template>
+
+<ng-template #defaultRowTemplate let-item>
+  <td class="row-cell">{{ item?.Name }}</td>
+  <td class="row-cell">{{ item?.Email }}</td>
+  <td class="row-cell">{{ item?.Phone }}</td>
+</ng-template>
