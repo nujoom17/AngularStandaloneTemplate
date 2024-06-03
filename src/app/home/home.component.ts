@@ -67,7 +67,6 @@ export default class HomeComponent implements OnInit,AfterViewInit {
         
         this.totalCount = res.totalCount;
         
-        console.log(res.data,this.totalCount)
         this.pagesVisible.set(
           Math.ceil(this.totalCount / this.pageConfig().pageSize)
         );
