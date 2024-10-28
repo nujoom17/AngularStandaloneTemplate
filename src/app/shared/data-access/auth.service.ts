@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     this.state.update(() => ({ status: 'pending', user: null }));
   }
 

@@ -1,18 +1,26 @@
 import { AfterViewInit, Component, OnInit, ViewChild, effect, inject, signal } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+
 import { AuthService } from '../shared/data-access/auth.service';
 import { Router } from '@angular/router';
 import { ReportTableComponent } from '../shared/report-table/report-table.component';
 import { of } from 'rxjs';
 import { PaginationComponent } from '../shared/pagination/pagination.component';
+import { MatReportTableComponent } from '../shared/mat-table-common/mat-table-common.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+
 
 @Component({
   standalone: true,
   selector: 'app-home',
   templateUrl: "./home.component.html",
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, PaginationComponent, ReportTableComponent],
+  imports: [
+    PaginationComponent,
+     ReportTableComponent,
+     MatIconModule,
+     MatToolbarModule,
+    MatReportTableComponent],
   styleUrls: ['./home.component.scss'],
 })
 export default class HomeComponent implements OnInit,AfterViewInit {
@@ -27,6 +35,9 @@ export default class HomeComponent implements OnInit,AfterViewInit {
   });
   pagesVisible = signal(1);
   totalCount: number = 0;
+  reportData: any;
+
+  tableType: 'regular'|'material'='regular'
 
   constructor() {
     effect(() => {
@@ -61,8 +72,7 @@ export default class HomeComponent implements OnInit,AfterViewInit {
     {"EntityName":"Custom 3","EntityContact":"Custom 23","Type":"Type 3","ExtraInfo":"ExOne2223"}
     ],totalCount:3}).subscribe({
       next: async (res:any) => {
-        // this.reportData = res.data;
-        this.reportTableComponent.reportData = await res.data
+        this.reportData = res.data;
         
         this.totalCount = res.totalCount;
         

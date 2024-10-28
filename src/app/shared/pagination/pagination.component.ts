@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, } from '@angular/common';
 import {
   Component,
   EventEmitter,
-  Input,
+  input,
   Output,
   computed,
   signal,
@@ -21,72 +21,66 @@ interface pageConfig {
   imports: [CommonModule, FormsModule],
 })
 export class PaginationComponent {
-  minIndex: number = 1;
-  maxIndex: number = 1;
+ 
+  minIndex = computed(()=>{
+    return  this.pageConfig().pageNumber * this.pageConfig().pageSize -
+    this.pageConfig().pageSize + 1;
+  })
+
+  maxIndex = computed(()=>{
+    let result = this.pageConfig().pageSize * this.pageConfig().pageNumber;
+
+    if (result > this.totalCount()) {
+      result = this.totalCount();
+    }
+    return result
+  })
+
   totalPage: number[] = [];
-  @Input() showPageIndex: boolean = true;
+  showPageIndex = input<boolean>();
   @Output() pageData = new EventEmitter();
-  @Input() pageConfig: pageConfig = {
-    pageNumber: 1,
-    pageSize: 10,
-  };
-  @Input() pagesVisible: number = 1;
-  @Input() totalCount: number = 1;
+  pageConfig = input<pageConfig>({
+    pageNumber:1,
+    pageSize:10
+  })
+  pagesVisible = input<number>(0)
+  totalCount = input<number>(0)
 
-  totalPageVisible = signal([]);
-
-  constructor() {}
-
-  ngOnChanges() {
+  totalPageVisible = computed(()=>{
     let pages: any = [];
     for (
-      let i = this.pageConfig.pageNumber, j = this.pageConfig.pageNumber - 1;
-      i <= this.pageConfig.pageNumber + 4, j >= this.pageConfig.pageNumber - 5;
+      let i = this.pageConfig().pageNumber, j = this.pageConfig().pageNumber - 1;
+      i <= this.pageConfig().pageNumber + 4, j >= this.pageConfig().pageNumber - 5;
       i++, j--
     ) {
-      if (i <= this.pagesVisible && pages?.length < 5) {
+      if (i <= this.pagesVisible() && pages?.length < 5) {
         pages?.push(i);
       }
       if (j > 0 && pages?.length < 5) pages?.unshift(j);
     }
 
-    this.totalPageVisible.set(pages);
-    this.minIndex =
-      this.pageConfig.pageNumber * this.pageConfig.pageSize -
-      this.pageConfig.pageSize +
-      1;
-    this.maxIndex = this.pageConfig.pageSize * this.pageConfig.pageNumber;
-    if (this.maxIndex > this.totalCount) {
-      this.maxIndex = this.totalCount;
-    }
-  }
+    return pages
+  },);
 
-    applyPagination(event: any, pageSizeChanged?:boolean) {
+  constructor() {}
+
+  applyPagination(event: any, pageSizeChanged?:boolean) {
     if (
-      event > this.pagesVisible ||
+      event > this.pagesVisible() ||
       event < 1 ||
-      (this.pageConfig.pageNumber == event && !pageSizeChanged) 
+      (this.pageConfig().pageNumber == event && !pageSizeChanged)
     )
       return;
-    this.pageConfig.pageNumber = event;
-    this.minIndex =
-      this.pageConfig.pageNumber * this.pageConfig.pageSize -
-      this.pageConfig.pageSize +
-      1;
-    this.maxIndex = this.pageConfig.pageSize * this.pageConfig.pageNumber;
-
-    if (this.maxIndex > this.totalCount) {
-      this.maxIndex = this.totalCount;
-    }
+    this.pageConfig().pageNumber = event;
 
     this.pageData.emit({
-      pageNumber: this.pageConfig.pageNumber,
-      pageSize: this.pageConfig.pageSize,
+      pageNumber: this.pageConfig().pageNumber,
+      pageSize: this.pageConfig().pageSize,
     });
   }
 
   pageSizeChanged(event:any){
-    this.pageConfig.pageSize = event as number
+    this.pageConfig().pageSize = event as number
     this.applyPagination(1,true)
   }
 }

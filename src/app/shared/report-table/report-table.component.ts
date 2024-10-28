@@ -9,6 +9,7 @@ import {
   Output,
   TemplateRef,
   inject,
+  input,
 } from "@angular/core";
 import { FormsModule, NgModel } from "@angular/forms";
 import { RouterOutlet } from "@angular/router";
@@ -19,6 +20,8 @@ import {
   debounceTime,
   distinctUntilChanged,
 } from "rxjs";
+import { SearchPipe } from "../pipes/search.pipe";
+import { NgxPaginationModule } from "ngx-pagination";
 
 
 @Component({
@@ -26,17 +29,19 @@ import {
   templateUrl: "./report-table.component.html",
   styleUrls: ["./report-table.component.scss"],
   providers: [DatePipe],
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [CommonModule, RouterOutlet, FormsModule, NgxPaginationModule, SearchPipe],
   standalone:true
-
 })
 export class ReportTableComponent {
-  reportData: any;
-  @Input() data: any;
-  @Input() reportTitle: any;
+  reportData = input<any>([])
+  reportTitle = input<any>()
+  paginateManually = input<boolean>(false)
+  pageSize = input<number>(10)
+  pageNumber = input<number>(1)
+  isClientSideSearchEnabled = input<boolean>(false) //only works for manual pagination via front-end
+  searchFilter:any
 
-  @Output() fetchReportDataEvent = new EventEmitter();
-  @Output() addButtonEvent = new EventEmitter();
+  searchFilterList = input<any[]>()
 
   txtQuery: any;
 
@@ -49,10 +54,9 @@ export class ReportTableComponent {
 
   @ContentChild("customHeaders") customHeaders!: TemplateRef<any>;
   @ContentChild("customRows") customRows!: TemplateRef<any>;
-  @Input() isSingleDate: boolean = false;
-  @Input() isSearchWithDropdown: boolean = false;
   entityList: any;
   entityTypeList: any;
+  @Output() fetchReportDataEvent = new EventEmitter();
 
 
   fetchReportData(param?: any, additionalParam?: any) {
@@ -101,7 +105,7 @@ export class ReportTableComponent {
   }
 
   addTableModal(event:any) {
-    this.addButtonEvent.emit(event);
+    // this.addButtonEvent.emit(event);
   }
 
   ngOnDestroy() {

@@ -37,22 +37,29 @@
       <!--end::Search-->
       <!--begin::Card body-->
       <div class="card-body">
-        <!--begin::Table-->
-        <div class="table-wrapper">
-          <table class="custom-table">
-            <thead>
-              <tr class="table-header">
-                <ng-container *ngTemplateOutlet="customHeaders || defaultHeaderTemplate"></ng-container>
-              </tr>
-            </thead>
-            <tbody class="table-body">
-              <tr *ngFor="let item of reportData" appCustomAnimate>
-                <ng-container *ngTemplateOutlet="customRows || defaultRowTemplate; context: { $implicit: item }"></ng-container>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!--end::Table-->
+          <!--begin::Table-->
+          <div class="table-wrapper">
+            <table class="custom-table">
+              <thead>
+                <tr class="table-header">
+                  <ng-container *ngTemplateOutlet="customHeaders || defaultHeaderTemplate"></ng-container>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                @if (!!paginateManually()) { @for (item of reportData() | paginate: { itemsPerPage: pageSize(), currentPage: pageNumber() } | searchPipe
+                : txtQuery:searchFilter ; track item; let i = $index) {
+                <tr appCustomAnimate>
+                  <ng-container *ngTemplateOutlet="customRows || defaultRowTemplate; context: { $implicit: item }"> </ng-container>
+                </tr>
+                } }@else{ @for (item of reportData() ; track item) {
+                <tr appCustomAnimate>
+                  <ng-container *ngTemplateOutlet="customRows || defaultRowTemplate; context: { $implicit: item }"> </ng-container>
+                </tr>
+                } }
+              </tbody>
+            </table>
+          </div>
+          <!--end::Table-->
       </div>
       <!--end::Card body-->
     </div>

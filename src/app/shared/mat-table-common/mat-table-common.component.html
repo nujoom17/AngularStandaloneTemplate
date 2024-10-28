@@ -1,0 +1,64 @@
+<div class="wrapper-root">
+  <div class="post">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-actions">
+          <button type="button" (click)="fetchReportData()" class="btn-refresh">
+            <i class="ki-outline ki-arrows-loop fs-2"></i> Refresh
+          </button>
+          <button type="button" (click)="exportExcel()" class="btn-export">
+            <i class="ki-outline ki-exit-up fs-2"></i> Export
+          </button>
+        </div>
+      </div>
+      
+      <div class="search-container">
+        <!-- <input
+          matInput
+          type="text"
+          placeholder="Search..."
+          (input)="dataSource.filter = $event.target.value.trim().toLowerCase()"
+        /> -->
+      </div>
+
+      <div class="card-body">
+        <div class="table-wrapper">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container *ngTemplateOutlet="customHeaders || defaultHeaderTemplate"></ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element"> <button class="btn btn-sm"><i class="ki-outline ki-pencil"></i></button> </td>
+            </ng-container>
+
+            <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column }} </th>
+              <td mat-cell *matCellDef="let element"> 
+                <ng-container *ngTemplateOutlet="customRows || defaultRowTemplate; context: { $implicit: element }"></ng-container>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #defaultHeaderTemplate>
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <th mat-header-cell *matHeaderCellDef> Phone </th>
+  </ng-template>
+
+  <ng-template #defaultRowTemplate let-item>
+    <td mat-cell *matCellDef="let item">{{ item?.Name }}</td>
+    <td mat-cell *matCellDef="let item">{{ item?.Email }}</td>
+    <td mat-cell *matCellDef="let item">{{ item?.Phone }}</td>
+  </ng-template>
+</div>

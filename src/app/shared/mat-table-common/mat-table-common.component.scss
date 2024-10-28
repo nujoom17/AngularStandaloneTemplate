@@ -1,0 +1,41 @@
+.wrapper-root {
+  padding: 16px;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-wrapper {
+  margin-top: 16px;
+  overflow: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.header-cell {
+  background-color: #f1f1f1;
+  text-align: left;
+}
+
+.row-cell {
+  padding: 8px;
+}
+
+mat-header-cell {
+  background-color: #f0f0f0; // Light gray for header background
+  color: black; // Ensure header text is black
+}
+
+mat-cell {
+  background-color: white; // Default background for table cells
+  color: black; // Ensure cell text is black
+}
+
+mat-cell:hover {
+  background-color: #e0e0e0; // Hover effect for better visibility
+}
