@@ -56,7 +56,6 @@ export default class HomeComponent implements OnInit,AfterViewInit {
     }; 
 
  
-    console.log(this.reportTableComponent)
     of({data:[{"EntityName":"Custom One","EntityContact":"Custom 12","Type":"Type One","ExtraInfo":"ExOne23"},
     {"EntityName":"Custom 2","EntityContact":"CContactom 2","Type":"Type 2","ExtraInfo":"ExOne4523"},
     {"EntityName":"Custom 3","EntityContact":"Custom 23","Type":"Type 3","ExtraInfo":"ExOne2223"}
