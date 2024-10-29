@@ -23,6 +23,7 @@ export function errorInterceptor (req: HttpRequest<any>, next: HttpHandlerFn): O
               return throwError(() => error);
             }
           }), catchError((error) => {
+
     let errorMessage = "An unexpected error has occurred.";
     if (error instanceof HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
@@ -55,7 +56,6 @@ export function errorInterceptor (req: HttpRequest<any>, next: HttpHandlerFn): O
         }
     } else {
     }
-        console.error(errorMessage);
         return throwError(() => new Error(errorMessage));
     })
     

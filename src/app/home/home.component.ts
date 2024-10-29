@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, effect, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, effect, inject, signal } from '@angular/core';
 
 import { AuthService } from '../shared/data-access/auth.service';
 import { Router } from '@angular/router';
@@ -26,7 +26,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 export default class HomeComponent implements OnInit,AfterViewInit {
   authService = inject(AuthService);
   private router = inject(Router);
-  
+  private cdr = inject(ChangeDetectorRef)
+
   @ViewChild("reportTable")
   reportTableComponent: ReportTableComponent | any;
   pageConfig = signal({
@@ -75,6 +76,9 @@ export default class HomeComponent implements OnInit,AfterViewInit {
         this.reportData = res.data;
         
         this.totalCount = res.totalCount;
+        
+        this.cdr.detectChanges()
+        this.cdr.markForCheck()
         
         this.pagesVisible.set(
           Math.ceil(this.totalCount / this.pageConfig().pageSize)
