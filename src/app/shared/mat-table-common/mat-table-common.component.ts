@@ -18,23 +18,29 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
   ]})
 export class MatReportTableComponent {
-  @Input() displayedColumns: string[]=[];
-  @Input() dataSource: any[] = []
+  @Input() displayedColumns: string[] = [];
+  totalCount = input<number>()
+  private _dataSource: any[] = [];
+  @Input() 
+  set dataSource(data: any[]) {
+    this._dataSource = data;
+    this.tableDataSource.data = data; // Update the table data here
+  }
+  get dataSource(): any[] {
+    return this._dataSource;
+  }
+
+  tableDataSource = new MatTableDataSource<any>();
+
   @ViewChild('customHeaders') customHeaders?: TemplateRef<any>;
   @ViewChild('customRows') customRows?: TemplateRef<any>;
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  dataSourceInstance = new MatTableDataSource<any>(this.dataSource);
-
-  ngOnInit() {
-    this.dataSourceInstance.data = this.dataSource;
-  }
-
 
   ngAfterViewInit() {
-    this.dataSourceInstance.paginator = this.paginator;
-    this.dataSourceInstance.sort = this.sort;
+    this.tableDataSource.paginator = this.paginator;
+    this.tableDataSource.sort = this.sort;
   }
 
   fetchReportData() {

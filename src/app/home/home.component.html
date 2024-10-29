@@ -8,6 +8,7 @@
     <button class="btn-general" (click)="tableType == 'material'? tableType='regular':tableType='material'">Switch Table type</button>
     <!--Re usable table component, pass the names of the columns in custom headers ng-template and the respective row data items in customRows and use anywhere-->
    @if(tableType == 'regular'){
+    <p class="my-3">Regular Table</p>
      <app-report-table
      #reportTable
      [reportData]="reportData"
@@ -46,8 +47,10 @@
     ></app-pagination>
     }
    }@else{
+    <p class="my-3">Material Table</p>
     <app-mat-table-common
     [dataSource]="reportData"
+    [totalCount]="totalCount"
     [displayedColumns]="['EntityName','EntityContact','Type','ExtraInfo']">
   </app-mat-table-common>
    }

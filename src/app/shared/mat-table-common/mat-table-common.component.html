@@ -13,17 +13,17 @@
       </div>
       
       <div class="search-container">
-        <!-- <input
+        <input
           matInput
           type="text"
           placeholder="Search..."
-          (input)="dataSource.filter = $event.target.value.trim().toLowerCase()"
-        /> -->
+          class="search-bar"
+        />
       </div>
-
+  
       <div class="card-body">
         <div class="table-wrapper">
-          <table mat-table matSort  [dataSource]="dataSource" class="mat-elevation-z4">
+          <table mat-table matSort [dataSource]="tableDataSource" class="mat-elevation-z4">
             <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
               <th mat-header-cell mat-sort-header *matHeaderCellDef> {{ column }} </th>
               <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
@@ -32,22 +32,13 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-
-          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  
+          <mat-paginator [length]="totalCount()" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
         </div>
       </div>
     </div>
   </div>
+  
 
-  <ng-template #defaultHeaderTemplate>
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <th mat-header-cell *matHeaderCellDef> Email </th>
-    <th mat-header-cell *matHeaderCellDef> Phone </th>
-  </ng-template>
 
-  <ng-template #defaultRowTemplate let-item>
-    <td mat-cell *matCellDef="let item">{{ item?.Name }}</td>
-    <td mat-cell *matCellDef="let item">{{ item?.Email }}</td>
-    <td mat-cell *matCellDef="let item">{{ item?.Phone }}</td>
-  </ng-template>
 </div>

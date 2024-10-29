@@ -39,3 +39,75 @@ mat-cell {
 mat-cell:hover {
   background-color: #e0e0e0; // Hover effect for better visibility
 }
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* Header styling */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+}
+
+.card-actions button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card-actions button i {
+  margin-right: 4px;
+}
+
+/* Hover effect for buttons */
+.card-actions button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Search container */
+.search-container {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+/* Focus state for search input */
+.search-bar:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Table and paginator styling */
+.table-wrapper {
+  padding: 16px;
+}
+
+.mat-elevation-z4 {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
