@@ -67,9 +67,9 @@ export default class HomeComponent implements OnInit,AfterViewInit {
     }; 
 
  
-    of({data:[{"EntityName":"Custom One","EntityContact":"Custom 12","Type":"Type One","ExtraInfo":"ExOne23"},
-    {"EntityName":"Custom 2","EntityContact":"CContactom 2","Type":"Type 2","ExtraInfo":"ExOne4523"},
-    {"EntityName":"Custom 3","EntityContact":"Custom 23","Type":"Type 3","ExtraInfo":"ExOne2223"}
+    of({data:[{"id":1,"EntityName":"Custom One","EntityContact":"Custom 12","Type":"Type One","ExtraInfo":"ExOne23"},
+    {"id":2,"EntityName":"Custom 2","EntityContact":"CContactom 2","Type":"Type 2","ExtraInfo":"ExOne4523"},
+    {"id":3,"EntityName":"Custom 3","EntityContact":"Custom 23","Type":"Type 3","ExtraInfo":"ExOne2223"}
     ],totalCount:3}).subscribe({
       next: async (res:any) => {
         this.reportData = res.data;

@@ -5,7 +5,7 @@
         <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
-    <button (click)="tableType == 'material'? tableType='regular':tableType='material'">Switch Table type</button>
+    <button class="btn-general" (click)="tableType == 'material'? tableType='regular':tableType='material'">Switch Table type</button>
     <!--Re usable table component, pass the names of the columns in custom headers ng-template and the respective row data items in customRows and use anywhere-->
    @if(tableType == 'regular'){
      <app-report-table
@@ -47,24 +47,9 @@
     }
    }@else{
     <app-mat-table-common
-  [displayedColumns]="['Entity Name', 'Entity Contact', 'Type', 'Extra Info']"
-  [dataSource]="reportData"
-  [customHeaders]="customHeaderTemplate"
-  [customRows]="customRowTemplate">
-  <ng-template #customHeaderTemplate>
-    <th mat-header-cell *matHeaderCellDef> Entity Name </th>
-    <th mat-header-cell *matHeaderCellDef> Entity Contact </th>
-    <th mat-header-cell *matHeaderCellDef> Type </th>
-    <th mat-header-cell *matHeaderCellDef> Extra Info </th>
-  </ng-template>
-  
-  <ng-template #customRowTemplate let-item>
-    <td mat-cell *matCellDef="let item">{{ item?.EntityName }}</td>
-    <td mat-cell *matCellDef="let item">{{ item?.EntityContact }}</td>
-    <td mat-cell *matCellDef="let item">{{ item?.Type }}</td>
-    <td mat-cell *matCellDef="let item">{{ item?.ExtraInfo }}</td>
-  </ng-template>
-</app-mat-table-common>
+    [dataSource]="reportData"
+    [displayedColumns]="['EntityName','EntityContact','Type','ExtraInfo']">
+  </app-mat-table-common>
    }
 
    
