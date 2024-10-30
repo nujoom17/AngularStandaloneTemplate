@@ -22,13 +22,14 @@ import {
 } from "rxjs";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SearchPipe } from "src/app/shared/pipes/search.pipe";
+import { CustomAnimateDirective } from "src/app/shared/directives/custom-animate.directive";
 
 @Component({
   selector: "app-report-table",
   templateUrl: "./report-table.component.html",
   styleUrls: ["./report-table.component.scss"],
   providers: [DatePipe],
-  imports: [CommonModule, RouterOutlet, FormsModule, NgxPaginationModule, SearchPipe],
+  imports: [CommonModule, RouterOutlet, FormsModule, NgxPaginationModule, SearchPipe, CustomAnimateDirective],
   standalone:true
 })
 export class ReportTableComponent {
