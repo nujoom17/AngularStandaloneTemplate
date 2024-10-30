@@ -1,10 +1,9 @@
-<div class="container">
-    <mat-toolbar color="primary">
-      <span class="spacer"></span>
-      <button mat-icon-button (click)="authService.logout()">
-        <mat-icon>logout</mat-icon>
-      </button>
-    </mat-toolbar>
+<div class="container" [ngClass]="!!isSidebarCollapsed()?'collapsed':'expanded'">
+    <app-header [isSidebarCollapsed]="isSidebarCollapsed()"></app-header>
+
+    <div class="sidebar">
+      <app-sidebar (collapsedEvent)="isSidebarCollapsed.set($event)"></app-sidebar>
+    </div>
     <button class="btn-general" (click)="tableType == 'material'? tableType='regular':tableType='material'">Switch Table type</button>
     <!--Re usable table component, pass the names of the columns in custom headers ng-template and the respective row data items in customRows and use anywhere-->
    @if(tableType == 'regular'){

@@ -1,0 +1,9 @@
+<mat-toolbar [ngStyle]="{'padding-left':!!isSidebarCollapsed()? '5%':'16%'}" color="primary">
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>MENU</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="authService.logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>

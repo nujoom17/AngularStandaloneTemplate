@@ -20,9 +20,8 @@ import {
   debounceTime,
   distinctUntilChanged,
 } from "rxjs";
-import { SearchPipe } from "../pipes/search.pipe";
 import { NgxPaginationModule } from "ngx-pagination";
-
+import { SearchPipe } from "src/app/shared/pipes/search.pipe";
 
 @Component({
   selector: "app-report-table",

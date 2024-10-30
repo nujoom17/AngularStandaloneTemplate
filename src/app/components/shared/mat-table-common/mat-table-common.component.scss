@@ -1,5 +1,16 @@
 .wrapper-root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   padding: 16px;
+  font-family: Arial, sans-serif;
+  width: 75vw;
+}
+
+.post{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1
 }
 
 .card {

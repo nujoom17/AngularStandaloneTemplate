@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'home',
     canActivate: [isAuthenticatedGuard()],
-    loadComponent: () => import('./home/home.component'),
+    loadComponent: () => import('./components/home/home.component'),
   },
   {
     path: '',

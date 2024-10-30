@@ -82,6 +82,7 @@
   background-color: #f1f1f1;
   text-align: left;
   border-bottom: 1px solid #ccc;
+  text-indent: 5%
 }
 
 .header-cell {
@@ -92,12 +93,18 @@
 
 .table-body {
   background-color: #fff;
+  text-indent: 5%;
+}
+
+.table-body tr{
+  height: 2.5rem;
 }
 
 .row-cell {
   padding: 8px;
   border-bottom: 1px solid #ccc;
   text-align: center;
+
 }
 
 /* Utility classes */

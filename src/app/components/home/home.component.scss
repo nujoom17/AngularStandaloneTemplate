@@ -65,3 +65,11 @@
     border-top: 1px solid #ddd;
     padding-top: 16px;
   }
+
+  .collapsed {
+    margin-left: 0; /* Align to the left when collapsed */
+  }
+  
+  .expanded {
+    margin-left: 20%; /* Space for expanded sidebar */
+  }

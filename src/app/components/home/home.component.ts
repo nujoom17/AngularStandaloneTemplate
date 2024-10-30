@@ -1,15 +1,18 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, effect, inject, signal } from '@angular/core';
 
-import { AuthService } from '../shared/data-access/auth.service';
+import { AuthService } from '../../shared/data-access/auth.service';
 import { Router } from '@angular/router';
-import { ReportTableComponent } from '../shared/report-table/report-table.component';
+
 import { of } from 'rxjs';
-import { PaginationComponent } from '../shared/pagination/pagination.component';
-import { MatReportTableComponent } from '../shared/mat-table-common/mat-table-common.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
-
+import { HeaderComponent } from '../shared/header/header.component';
+import { SidebarComponent } from '../shared/sidebar/sidebar.component';
+import { CommonModule } from '@angular/common';
+import { ReportTableComponent } from '../shared/report-table/report-table.component';
+import { PaginationComponent } from '../shared/pagination/pagination.component';
+import { MatReportTableComponent } from '../shared/mat-table-common/mat-table-common.component';
 
 @Component({
   standalone: true,
@@ -20,6 +23,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
      ReportTableComponent,
      MatIconModule,
      MatToolbarModule,
+     HeaderComponent,
+     CommonModule,
+     SidebarComponent,
     MatReportTableComponent],
   styleUrls: ['./home.component.scss'],
 })
@@ -39,6 +45,7 @@ export default class HomeComponent implements OnInit,AfterViewInit {
   reportData: any;
 
   tableType: 'regular'|'material'='regular'
+  isSidebarCollapsed = signal(false);
 
   constructor() {
     effect(() => {
@@ -89,6 +96,7 @@ export default class HomeComponent implements OnInit,AfterViewInit {
       },
     });
   }
+
 
   pageUpdated(event:any) {
     this.pageConfig.set(event);
