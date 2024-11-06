@@ -8,14 +8,11 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { errorInterceptor } from './shared/interceptors/general.interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
-export const AUTH_TOKEN = new InjectionToken('auth', {
+export const AUTH_TOKEN = new InjectionToken<string | null>('auth_token', {
   providedIn: 'root',
-  factory: () => {
-    return sessionStorage.getItem('auth_token') // we could add more conditions here either within the function or as separate injection token for better security
-      ? sessionStorage.getItem('auth_token')
-      : null;
-  },
+  factory: () => sessionStorage.getItem('auth_token')
 });
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimations(), provideHttpClient(

@@ -91,7 +91,6 @@ import {
       //add additional tags into above object with corresponding animation style and
       //then inject this directive selector into the html tag where it needs to be triggered
       this.player = animeMap[animationToPlay].create(this.el.nativeElement);
-      console.log(111)
       this.player.play();
     }
   

@@ -37,7 +37,6 @@
 
      @if(totalCount>0){
       <app-pagination
-      style="width:75% !important"
       [showPageIndex]="true"
       [pageConfig]="pageConfig()"
       [pagesVisible]="pagesVisible()"
@@ -53,6 +52,9 @@
     [displayedColumns]="['EntityName','EntityContact','Type','ExtraInfo']">
   </app-mat-table-common>
    }
+
+   <app-external></app-external>
+
 
    
     

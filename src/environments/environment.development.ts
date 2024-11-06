@@ -7,6 +7,7 @@ export const environment = {
     authDomain: 'angularstart-chat.firebaseapp.com',
     messagingSenderId: '767794269558',
   },
+  externalModuleFilePath:'/assets/external/',
   production: false,
   useEmulators: true,
 };

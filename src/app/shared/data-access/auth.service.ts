@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal, ɵunwrapWritableSignal } from '@angular/core';
 import { from, defer, of } from 'rxjs';
 
 import { Credentials } from '../interfaces/credentials';
@@ -7,56 +7,62 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 export type AuthUser = any | null | undefined;
 
-interface AuthState {
-  user: AuthUser;
+
+export interface AuthState {
+  user: any; // Replace 'any' with the specific user type if available
+  status?: 'authenticated' | 'pending' | 'unauthenticated';
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private auth = inject(AUTH_TOKEN); // to check the injection status of session token in client-side storage
-
-  // state
+  private auth = inject(AUTH_TOKEN); // Inject the token from sessionStorage
+  
   private state = signal<AuthState>({
     user: undefined,
+    status: this.auth ? 'authenticated' : 'unauthenticated'
   });
 
-  // selectors
-  user = computed(() => this.state().user);
+  // Computed signal to access the user state
+  private authTokenSignal = signal(inject(AUTH_TOKEN));
 
-  private user$ = of(this.auth); // currently we only look into token injection status to validate the login status of user,
-  //^^we may add additional conditions to the injection token value to amplify the security access properties
+  // Computed signal for the user state
+  user = computed(() => {
+    const token = this.authTokenSignal();
+    return {
+      user: token ? { token } : undefined,
+      status: token ? 'authenticated' : 'unauthenticated'
+    };
+  });
+  // Update the state based on the current auth token
 
   constructor() {
-    this.user$.pipe(takeUntilDestroyed()).subscribe((user: any) => {
-      return this.state.update((state) => ({
-        ...state,
-        user,
-      }));
-    });
+  
   }
 
   login(credentials: Credentials) {
-    return from(
-      defer(
-        //loginAPI()
-        () => of(true)
-      )
-    );
+    // Mocking the login API response
+    return of(new Promise<void>((resolve) => {
+      // Simulate API call
+      sessionStorage.setItem('auth_token', 'mock_token'); // Example token
+      this.authTokenSignal.set('mock_token'); // Update signal with new token
+      resolve();
+    }));
   }
 
   logout() {
     sessionStorage.clear();
-    this.state.update(() => ({ status: 'pending', user: null }));
+    this.authTokenSignal.set(null); // Clear the auth token in signal
+    this.state.update(() => ({ user: null, status: 'unauthenticated' }));
   }
 
   createAccount(credentials: Credentials) {
-    return from(
-      defer(
-        //registerAPI()
-        () => of(true)
-      )
-    );
+    // Mocking the account creation process
+    return of(new Promise<void>((resolve) => {
+      // Simulate registration API call
+      resolve();
+    }))
   }
 }
+

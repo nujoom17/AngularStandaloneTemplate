@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ReportTableComponent } from '../shared/report-table/report-table.component';
 import { PaginationComponent } from '../shared/pagination/pagination.component';
 import { MatReportTableComponent } from '../shared/mat-table-common/mat-table-common.component';
+import { ExternalComponent } from '../external/external.component';
 
 @Component({
   standalone: true,
@@ -26,6 +27,7 @@ import { MatReportTableComponent } from '../shared/mat-table-common/mat-table-co
      HeaderComponent,
      CommonModule,
      SidebarComponent,
+     ExternalComponent,
     MatReportTableComponent],
   styleUrls: ['./home.component.scss'],
 })
