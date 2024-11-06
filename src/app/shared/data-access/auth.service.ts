@@ -31,25 +31,35 @@ export class AuthService {
 
   user = computed(() => this.state().user);
 
-  constructor(){
-    effect(()=>{
-      if (this.state().user) {
-        let encrypted = crypto.AES.encrypt(
-          JSON.stringify(this.state().user),
-          "u3eR"
-        ).toString();
-        sessionStorage.setItem('user_data', encrypted);
+  constructor() {
+    effect(() => {
+      let currentUser = this.state().user;
+      
+      if (currentUser) {
+        if (typeof currentUser === 'object') {
+          currentUser = JSON.stringify(currentUser);
+        }
+
+        if (!/^U2FsdGVkX/.test(currentUser)) {
+          try {
+            currentUser = crypto.AES.encrypt(currentUser, "u3eR").toString();
+          } catch (error) {
+            console.error("Encryption failed:", error);
+          }
+        }
+  
+        sessionStorage.setItem('user_data', currentUser);
       } else {
         sessionStorage.removeItem('user_data');
       }
-
-      if (this.state().token) {
-        sessionStorage.setItem('auth_token', this.state().token as string);
+  
+      const token = this.state().token;
+      if (token) {
+        sessionStorage.setItem('auth_token', token as string);
       } else {
         sessionStorage.removeItem('auth_token');
       }
-    })
- 
+    });
   }
 
 
