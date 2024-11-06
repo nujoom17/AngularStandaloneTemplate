@@ -80,7 +80,6 @@ export class AuthService {
   logout() {
     this.state.set({user:null, token: null,status:'unauthenticated'}); // Clear the tokenInjector token in signal
     sessionStorage.clear()
-    // this.state.update(() => ({ user: null, status: 'unauthenticated' }));
   }
 
   createAccount(credentials: Credentials) {
