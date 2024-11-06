@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Credentials } from 'src/app/shared/interfaces/credentials';
-import { LoginStatus } from '../data-access/login.service';
+import { AuthService } from 'src/app/shared/data-access/auth.service';
 
 @Component({
   standalone: true,
@@ -37,17 +37,15 @@ import { LoginStatus } from '../data-access/login.service';
         <mat-icon matPrefix>lock</mat-icon>
       </mat-form-field>
 
-      @if (loginStatus === 'error'){
-      <mat-error>Could not log you in with those details.</mat-error>
-      } @if(loginStatus === 'authenticating'){
-      <mat-spinner diameter="50"></mat-spinner>
+      @if(authService.sessionData().status === 'pending'){
+      <mat-spinner diameter="25"></mat-spinner> Authenticating credentials...
       }
 
       <button
         mat-raised-button
         color="accent"
         type="submit"
-        [disabled]="loginStatus === 'authenticating'"
+        [disabled]="authService.sessionData().status === 'pending'"
       >
         Login
       </button>
@@ -84,7 +82,8 @@ import { LoginStatus } from '../data-access/login.service';
   ],
 })
 export class LoginFormComponent {
-  @Input({ required: true }) loginStatus!: LoginStatus;
+  authService = inject(AuthService)
+
   @Output() login = new EventEmitter<Credentials>();
 
   private fb = inject(FormBuilder);

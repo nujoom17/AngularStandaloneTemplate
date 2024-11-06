@@ -1,5 +1,5 @@
 <div class="container">
-  @if(authService.user() === null){
+  @if(!authService.sessionData().user){
 
   <div #slider class="slider"></div>
   <div class="btn">
@@ -13,20 +13,15 @@
     <!-- login form -->
     <div class="login-box">
       <app-login-form
-        [loginStatus]="loginService.status()"
-        (login)="loginService.login$.next($event)"
+        (login)="loginUser($event)"
       />
     </div>
 
     <!-- signup form -->
     <div class="signup-box">
       <app-register-form
-        [status]="registerService.status()"
-        (register)="registerService.createUser$.next($event)"
       />
     </div>
   </div>
-  } @else {
-  <mat-spinner diameter="50" />
   }
 </div>

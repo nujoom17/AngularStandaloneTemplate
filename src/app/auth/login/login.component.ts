@@ -10,9 +10,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './ui/login-form.component';
-import { LoginService } from './data-access/login.service';
 import { AuthService } from 'src/app/shared/data-access/auth.service';
-import { RegisterService } from '../register/data-access/register.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import RegisterComponent from '../register/register.component';
 import { RegisterFormComponent } from '../register/ui/register-form.component';
@@ -21,7 +19,7 @@ import { RegisterFormComponent } from '../register/ui/register-form.component';
   standalone: true,
   selector: 'app-login',
   templateUrl: `./login.component.html`,
-  providers: [LoginService, RegisterService],
+  providers: [],
   imports: [
     RouterModule,
     LoginFormComponent,
@@ -32,17 +30,15 @@ import { RegisterFormComponent } from '../register/ui/register-form.component';
   styleUrls: [`./login.component.scss`],
 })
 export default class LoginComponent implements AfterViewInit {
-  public loginService = inject(LoginService);
   public authService = inject(AuthService);
   private router = inject(Router);
-  public registerService = inject(RegisterService);
   public ngZone = inject(NgZone);
   public activatedRoute = inject(ActivatedRoute);
 
   isRegistration: boolean = true;
   constructor() {
     effect(() => {
-      if (this.authService.user()) {
+      if (!!this.authService.user()) {
         this.router.navigate(['home']);
       }
     });
@@ -63,6 +59,7 @@ export default class LoginComponent implements AfterViewInit {
       }, 400);
     });
   }
+  
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -89,5 +86,11 @@ export default class LoginComponent implements AfterViewInit {
         });
       });
     }, 100);
+  }
+
+  loginUser(event:any){
+    this.authService.login(event).subscribe({next:() => {
+      console.log("Login complete!");
+  }});
   }
 }

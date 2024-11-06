@@ -12,6 +12,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/home/home.component'),
   },
   {
+    path: 'project',
+    loadComponent: () => import('./components/external/external.component').then((m)=>m.ExternalComponent),
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full',

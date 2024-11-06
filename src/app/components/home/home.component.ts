@@ -51,6 +51,7 @@ export default class HomeComponent implements OnInit,AfterViewInit {
 
   constructor() {
     effect(() => {
+      console.log(this.authService.user())
       if (!this.authService.user()) {
         this.router.navigate(['auth', 'login']);
       }
@@ -58,6 +59,7 @@ export default class HomeComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(){
+    // sessionStorage.setItem('')
   }
 
   ngAfterViewInit(){

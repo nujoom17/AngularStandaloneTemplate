@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from 'src/app/shared/data-access/auth.service';
@@ -16,8 +16,12 @@ import { AuthService } from 'src/app/shared/data-access/auth.service';
 export class HeaderComponent {
   isSidebarCollapsed = input<boolean>(false)
   authService = inject(AuthService)
-  
+  cdr = inject(ChangeDetectorRef)
   toggleSidebar(){
 
+  }
+
+  logout(){
+    this.authService.logout()
   }
 }

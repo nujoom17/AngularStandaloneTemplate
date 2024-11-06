@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Credentials } from 'src/app/shared/interfaces/credentials';
 import { passwordMatchesValidator } from '../utils/password-matches';
-import { RegisterStatus } from '../data-access/register.service';
 
 @Component({
   standalone: true,
@@ -105,7 +104,7 @@ import { RegisterStatus } from '../data-access/register.service';
   ],
 })
 export class RegisterFormComponent {
-  @Input({ required: true }) status!: RegisterStatus;
+  @Input({ required: false }) status!: any;
   @Output() register = new EventEmitter<Credentials>();
 
   private fb = inject(FormBuilder);
