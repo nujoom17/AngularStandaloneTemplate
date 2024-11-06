@@ -65,6 +65,7 @@ export class AuthService {
 
   login(credentials: Credentials) {
     return new Observable((observer) => {
+      this.state.update(x=>({...x,status:'pending'}))
       setTimeout(async () => {
         let user_data = {name: 'John Doe'}
         let tokenVal = 'ey2bhQk.uquwuqwendqd'

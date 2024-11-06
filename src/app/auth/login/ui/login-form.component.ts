@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -14,17 +14,22 @@ import { AuthService } from 'src/app/shared/data-access/auth.service';
   template: `
     <form
       [formGroup]="loginForm"
-      (ngSubmit)="login.emit(loginForm.getRawValue())"
+      (ngSubmit)="submit()"
+       #form="ngForm"
     >
       <mat-form-field appearance="fill">
-        <mat-label>email</mat-label>
+        <mat-label>username</mat-label>
         <input
           matNativeControl
-          formControlName="email"
-          type="email"
-          placeholder="email"
+          formControlName="userName"
+          type="text"
+          placeholder="User Name"
         />
         <mat-icon matPrefix>mail</mat-icon>
+      @if( (loginForm.controls.userName.dirty || form.submitted) &&
+        !loginForm.controls.userName.valid ){
+        <mat-error>Please enter username</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>password</mat-label>
@@ -35,6 +40,10 @@ import { AuthService } from 'src/app/shared/data-access/auth.service';
           placeholder="password"
         />
         <mat-icon matPrefix>lock</mat-icon>
+        @if((loginForm.controls.password.dirty || form.submitted) &&
+        !loginForm.controls.password.valid ){
+        <mat-error>Please enter valid password</mat-error>
+        }
       </mat-form-field>
 
       @if(authService.sessionData().status === 'pending'){
@@ -89,7 +98,13 @@ export class LoginFormComponent {
   private fb = inject(FormBuilder);
 
   loginForm = this.fb.nonNullable.group({
-    email: [''],
-    password: [''],
+    userName: ['',Validators.required],
+    password: ['',Validators.required],
   });
+
+  submit(){
+    if(this.loginForm.valid){
+      this.login.emit(this.loginForm.getRawValue())
+    }
+  }
 }

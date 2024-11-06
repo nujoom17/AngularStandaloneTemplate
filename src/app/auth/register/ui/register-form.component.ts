@@ -14,17 +14,17 @@ import { passwordMatchesValidator } from '../utils/password-matches';
   template: `
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" #form="ngForm">
       <mat-form-field appearance="fill">
-        <mat-label>email</mat-label>
+        <mat-label>username</mat-label>
         <input
           matNativeControl
-          formControlName="email"
-          type="email"
-          placeholder="email"
+          formControlName="userName"
+          type="text"
+          placeholder="User Name"
         />
         <mat-icon matPrefix>email</mat-icon>
-        @if( (registerForm.controls.email.dirty || form.submitted) &&
-        !registerForm.controls.email.valid ) {
-        <mat-error>Please provide a valid email</mat-error>
+        @if( (registerForm.controls.userName.dirty || form.submitted) &&
+        !registerForm.controls.userName.valid ) {
+        <mat-error>Please provide a valid userName</mat-error>
         }
       </mat-form-field>
       <mat-form-field>
@@ -111,7 +111,7 @@ export class RegisterFormComponent {
 
   registerForm = this.fb.nonNullable.group(
     {
-      email: ['', [Validators.email, Validators.required]],
+      userName: ['', [Validators.required]],
       password: ['', [Validators.minLength(8), Validators.required]],
       confirmPassword: ['', [Validators.required]],
     },
